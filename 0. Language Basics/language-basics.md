@@ -241,20 +241,3 @@ void changeRealValue(int &x) {
 ✔️ References
 
 ---
-
-# 🎯 Next Step
-
-👉 Don’t just read.
-👉 Code it. Break it. Fix it.
-
----
-
-## 🔥 If you want next level:
-
-I can help you turn this into:
-
-* 📁 Proper repo structure
-* 🧠 Daily DSA roadmap
-* 💼 GitHub that impresses recruiters
-
-Just say: **next upgrade** 🚀
