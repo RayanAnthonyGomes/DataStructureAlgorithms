@@ -28,7 +28,7 @@ using namespace std;
 
 int main() {
     //Input : Only one line containing two separated numbers X, Y (1  ≤  X, Y  ≤  105).
-    int x,y;
+    long long x,y;
     cin >> x >> y;
     //Print 3 lines that contain the following in the same order:
 
@@ -36,11 +36,11 @@ int main() {
 // "X * Y = multiplication result" without quotes.
 // "X - Y = subtraction result" without quotes.
 
-    int add = x + y;
-    int mul = x  * y;
-    int neg = x - y;
-    cout << "X + Y = " << add << endl;
-    cout << "X * Y = " << mul << endl;
-    cout << "X - Y = " << neg << endl;
+    long long int add = x + y;
+    long long  mul =   x * y;
+    long long  int neg = x - y;
+    cout << x <<" + " << y <<  " = " << add << endl;
+    cout << x <<" * " << y <<  " = " << mul << endl;
+    cout << x <<" - " << y <<  " = " << neg;
     return 0;
 }
