@@ -49,3 +49,18 @@ int main() {
 
     return 0;
 }
+/*
+int n = nums.size();
+for(int i = 1; i < n; i++){  We assume the first element is already sorted
+    int key = nums[i]; key = current element to insert in sorted part
+    int j = i-1; j = index of last element in the sorted portion
+    
+    while(j > 0 && nums[j] >  key){  Compare key with elements on its left, If left element is bigger, shift it one position right
+        nums[j+1] =nums[j];
+        j--;
+    }
+    nums[j+1] = key; Place the key in its correct sorted position
+}
+return nums;
+
+*/

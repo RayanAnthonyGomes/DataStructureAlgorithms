@@ -53,3 +53,17 @@ int main() {
 
     return 0;
 }
+
+
+
+/*
+    my explanation:
+    2ta loop cholbe;
+    first loop (i = 0; i < nums.size) porzonto cholbe  jekhane ami assume korbo je minimum index i
+    second loop (j = i+1; j<numsss.size) porzonto cholbe jekhane ami compare korbo je ashol minindex  konta
+        if(nums[j] < nums[minindex]) taile korbo minindex =  j;
+
+    erpor  jodi minindex  != i  hoy  taile  swap(nums[minindex], nums[i])
+
+    last e nums return korbo;
+*/
