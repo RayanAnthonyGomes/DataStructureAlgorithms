@@ -37,7 +37,7 @@ public:
             }
     }
 
-    int missingNumber(vector<int> &nums){ //sum 1 -> n
+    int OPTIMALSUMmissingNumber(vector<int> &nums){ //sum 1 -> n
          int n = nums.size();
         int sum1 = (n*(n+1))/2;
         int sum2 = 0;
@@ -47,6 +47,19 @@ public:
         int  missing = sum1-sum2;
         return missing;
     }
+
+    int missingNumber(vector<int> &nums){ //sum 1 -> n
+         int n = nums.size();
+         int xor1 = 0, xor2 = 0;
+         for(int i = 0; i<nums.size();i++){
+            xor1  = xor1^(i+1); //xor  of 1->n
+            xor2  = xor2^nums[i]; //xor  of array elems
+
+         }
+         return(xor1^xor2);
+    }
+
+
 
 };
 
