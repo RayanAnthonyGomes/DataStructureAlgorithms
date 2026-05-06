@@ -1,0 +1,44 @@
+/*
+
+*/
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int missingNumber(vector<int> &nums){ //linear search
+        int n = nums.size();
+         for(int i = 0; i<=n;i++){
+            int flag = 0;
+            for(int j = 0; j <  n; j++){
+                if(nums[j] == i){
+                    flag = 1;
+                    break;
+                }
+            } 
+             if (flag == 0) return i;
+         }
+         return -1; //never execs but its there 
+    }
+
+
+};
+
+
+
+int main() {
+    vector<int> nums = {1, 2, 4, 0};
+
+    // Create an instance of the Solution class
+    Solution solution;
+
+    /* Call the missingNumber method 
+    to find the missing number*/
+    int ans = solution.missingNumber(nums);
+
+    cout << "The missing number is: " << ans << endl;
+
+    return 0;
+}
