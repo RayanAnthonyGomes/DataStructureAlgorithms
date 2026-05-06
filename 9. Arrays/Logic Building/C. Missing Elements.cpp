@@ -8,7 +8,7 @@ using namespace std;
 
 class Solution {
 public:
-    int missingNumber(vector<int> &nums){ //linear search
+    int BRUTEmissingNumber(vector<int> &nums){ //linear search
         int n = nums.size();
          for(int i = 0; i<=n;i++){
             int flag = 0;
@@ -23,7 +23,19 @@ public:
          return -1; //never execs but its there 
     }
 
+    int BETTERmissingNumber(vector<int> &nums){ //hashing
+            int n = nums.size();
+            int freq[n+1] = {0};
 
+            for (int num:nums)  
+            {
+                freq[num]++;
+            }
+            for (int i = 0; i <n; i++)
+            {
+                if(freq[i]==0)return i;
+            }
+    }
 };
 
 
