@@ -36,6 +36,18 @@ public:
                 if(freq[i]==0)return i;
             }
     }
+
+    int missingNumber(vector<int> &nums){ //sum 1 -> n
+         int n = nums.size();
+        int sum1 = (n*(n+1))/2;
+        int sum2 = 0;
+        for(int num:nums){
+            sum2+=num;
+        }
+        int  missing = sum1-sum2;
+        return missing;
+    }
+
 };
 
 
