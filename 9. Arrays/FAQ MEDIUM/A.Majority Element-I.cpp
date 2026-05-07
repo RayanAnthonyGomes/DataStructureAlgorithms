@@ -115,7 +115,7 @@ public:
     }
 
     //BEtter Solution
-    int majorityElement(vector<int>& nums) {
+    int majorityElementbetter(vector<int>& nums) {
         
         // Size of the given array
         int n = nums.size();
@@ -137,6 +137,47 @@ public:
         }
         
         // Return -1 if no majority element is found
+        return -1;
+    }
+    //optimal solution
+        int majorityElement(vector<int>& nums) {
+        
+        // Size of the given array
+        int n = nums.size();
+        
+        // Count
+        int cnt = 0;
+        
+        // Element
+        int el; 
+        
+        // Applying the algorithm
+        for (int i = 0; i < n; i++) {
+            if (cnt == 0) {
+                cnt = 1;
+                el = nums[i];
+            } else if (el == nums[i]) {
+                cnt++;
+            } else {
+                cnt--;
+            }
+        }
+        
+        /* Checking if the stored element
+         is the majority element*/
+        int cnt1 = 0;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == el) {
+                cnt1++;
+            }
+        }
+        
+        //return element if it is a majority element
+        if (cnt1 > (n / 2)) {
+            return el;
+        }
+        
+        //return -1 if no such element found
         return -1;
     }
 };
