@@ -84,8 +84,36 @@ using namespace std;
 
 class Solution {
 public:
-    //Function to find the leaders in an array.
-    vector<int> leadersBRUTE(vector<int>& nums) {
+        vector<int> leaders(vector<int>& nums) {
+        vector<int> ans;
+
+        // Iterate through each element in nums
+        for (int i = 0; i < nums.size(); i++) {
+            bool leader = true;
+
+            /* Check whether nums[i] is greater
+            than all elements to its right*/
+            for (int j = i + 1; j < nums.size(); j++) {
+                if (nums[j] >= nums[i]) {
+                    /* If any element to the right is greater 
+                    or equal, nums[i] is not a leader*/
+                    leader = false;
+                    break;
+                }
+            }
+
+            // If nums[i] is a leader, add it to the ans vector
+            if (leader) {
+                ans.push_back(nums[i]);
+            }
+        }
+
+       //Return the leaders 
+        return ans;
+    }    
+
+//Function to find the leaders in an array.
+    vector<int> leadersOptimal(vector<int>& nums) {
         vector<int> ans;
         
         if(nums.empty()) {
@@ -111,6 +139,7 @@ public:
         //Return the leaders
         return ans;
     }
+
 };
 
 int main() {
