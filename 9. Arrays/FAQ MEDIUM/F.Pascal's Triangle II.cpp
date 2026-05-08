@@ -67,6 +67,27 @@ Constraints
 All values will fit inside a 32-bit integer.
 */
 
+/*
+Intuition:
+A naive approach to solve this problem will be to use the formula for the element of rth row and cth column of Pascal's triangle repetitively to find each element in the rth row. The time complexity of this approach will be O(n2) as we need to calculate the value of each element in the nth row.
+
+A better way to solve this is by identifying a pattern in the rows of the Pascal's triangle. The rth row of Pascal's triangle is generated as shown in the figure:
+
+
+It can be seen that any element in the rth row is of the form:
+curr = (prev * (r-i))/(i)
+where prev is the previous element in the row and i is the index of the element in the row.
+
+Using this formula, we can generate the rth row of Pascal's triangle in O(n) time complexity.
+
+Approach:
+
+Initialize the list with a size equal to the given row number.
+Set the first element of the row to 1, as the first element in every row of Pascal's Triangle is always 1.
+Iterate through the row to compute each value using the above formula.
+Return the computed row as the final result.
+*/
+
 #include <bits/stdc++.h> 
 using namespace std;
 

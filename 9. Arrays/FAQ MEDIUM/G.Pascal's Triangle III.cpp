@@ -98,3 +98,74 @@ How can Pascal's triangle be used in binomial expansion?
 The n-th row of Pascal's triangle represents the coefficients of the terms in the expansion of (a+b)^n.
 
 */
+
+/*
+
+Intuition:
+A naive way to solve this problem will be to calculate the element n and c (where n is the given row number and c is the column number that will vary from 1 to n) for every column from 1 to n and for every row, using the process used in Pascal Triangle-I. However, this will result in an O(N3) time complexity.
+
+A better way to solve this problem will be to generate every row from 1 to n using the method discussed in Pascal Triangle-II and store the entire Pascal's Triangle in a 2D list. Once the entire Pascal's Triangle is generated, we can return the triangle.
+
+Approach:
+
+Create a 2D list to hold the values of Pascal's Triangle.
+For each row i from 0 to n-1, create a list to hold the values of the current row.
+Generate the row i using the method discussed in Pascal's triangle-II.
+Append the current row to the triangle. Once all rows are computed, return the triangle.
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+private:
+    // Function to generate a single row of Pascal's Triangle
+    vector<int> generateRow(int row) {
+        long long ans = 1;
+        vector<int> ansRow;
+        
+        /// Inserting the 1st element
+        ansRow.push_back(1); 
+
+        // Calculate the rest of the elements
+        for (int col = 1; col < row; col++) {
+            ans = ans * (row - col);
+            ans = ans / col;
+            ansRow.push_back(ans);
+        }
+        
+        return ansRow; // Return the computed row
+    }
+
+public:
+    // Function to generate Pascal's Triangle up to n rows
+    vector<vector<int>> pascalTriangleIII(int n) {
+        vector<vector<int>> pascalTriangle;
+
+        // Compute the entire Pascal's Triangle
+        for (int row = 1; row <= n; row++) {
+            pascalTriangle.push_back(generateRow(row));
+        }
+        
+        //return the pascalTriangle
+        return pascalTriangle;
+    }
+};
+
+int main() {
+    int n = 5;
+    Solution sol;
+
+    // Generate Pascal's Triangle with n rows
+    vector<vector<int>> pascalTriangle = sol.pascalTriangleIII(n);
+
+    // Output the Pascal's Triangle
+    for (auto& row : pascalTriangle) {
+        for (auto& element : row) {
+            cout << element << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
