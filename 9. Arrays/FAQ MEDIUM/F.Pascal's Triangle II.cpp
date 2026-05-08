@@ -66,3 +66,41 @@ Constraints
 1 <= r <= 30
 All values will fit inside a 32-bit integer.
 */
+
+#include <bits/stdc++.h> 
+using namespace std;
+
+class Solution {
+public:
+    // Function to return the rth row of pascal's triangle
+    vector<int> pascalTriangleII(int r) {
+        vector<int> ans(r); // to store the answer
+        
+        // Set the first element of the row as 1
+        ans[0] = 1; 
+        
+        // Compute each element in the rth row
+        for(int i = 1; i < r; i++) {
+            ans[i] = (ans[i-1]*(r-i))/i;
+        }
+        
+        return ans; // return the result
+    }
+};
+
+int main() {
+    // row number
+    int r = 5; 
+
+    // Create an instance of the Solution class
+    Solution sol; 
+    
+    // Function call to return the rth row of pascal's triangle
+    vector<int> ans = sol.pascalTriangleII(r);
+
+    // Output
+    cout << "Row " << r << ": ";
+    for(int x : ans) cout << x << " ";
+
+    return 0;
+}
