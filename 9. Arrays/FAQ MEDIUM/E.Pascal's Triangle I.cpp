@@ -72,5 +72,78 @@ Constraints
 1 <= r, c <= 30
 c <= r
 All values will fit inside a 32-bit integer.
+*/
+
+/*
+Intuition:
+A brute force way to solve this will be to generate the entire Pascal's Triangle up to the given row number and then return the element at the given position. However, this approach is not efficient as it involves generating the entire triangle even if we only need a single element.
+
+We can optimize this by calculating the value of the element directly using the formula for combinations (nCr) and avoiding the generation of the entire triangle. The element in the rth row and cth column will be r-1Cc-1.
+
+The formula for combinations (nCr) is given by:
+nCr = n! / (r! * (n-r)!), where n! denotes the factorial of n.
+
+To calculate nCr, we can use the following iterative formula to avoid overflow:
+nCr = (n * (n-1) * ... * (n-r+1)) / (r * (r-1) * ... * 1)
+
+
+Note
+We have the following properties of combinations: nCr = nCn-r
+As we are iterating for r number of times, we can choose the smaller value between r and (n-r) to minimize the number of iterations. This will help in optimizing the calculation.
+Approach:
+
+Identify the given row and column position in Pascal's Triangle.
+Compute the binomial coefficient nCr using the formula nCr = n! / (r! * (n-r)!).
+Optimize the calculation by selecting the smaller value between r and (n-r) to minimize iterations.
+Initialize the result as 1. Iterate through the range, updating the result using multiplication and division to prevent overflow.
+Return the computed nCr, which represents the value at the specified position in Pascal's Triangle.
 
 */
+
+#include <bits/stdc++.h> 
+using namespace std;
+
+class Solution {
+public:
+    // Function to print the element in rth row and cth column 
+    int pascalTriangleI(int r, int c) {
+        return nCr(r-1, c-1);
+    }
+    
+private:
+    // Function to calculate nCr
+    int nCr(int n, int r)  {
+        // Choose the smaller value for lesser iterations
+        if(r > n-r) r = n-r;
+        
+        // base case
+        if(r == 1) return n;
+        
+        int res = 1; // to store the result 
+        
+        // Calculate nCr using iterative method avoiding overflow 
+        for (int i = 0; i < r; i++) {
+            res = res * (n-i);
+            res = res / (i+1);
+        }
+        
+        return res; // return the result 
+    }
+};
+
+int main() {
+    // row number
+    int r = 5; 
+    // col number
+    int c = 3;
+
+    // Create an instance of the Solution class
+    Solution sol; 
+    
+    // Function call to print the element in rth row and cth column 
+    int ans = sol.pascalTriangleI(r, c);
+
+    cout << "The element in the rth row and cth column in pascal's triangle is: " << ans;
+
+    return 0;
+}
