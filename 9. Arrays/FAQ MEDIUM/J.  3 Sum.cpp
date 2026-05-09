@@ -93,6 +93,13 @@ Instead of finding triplets that sum to 0: Look for triplets that sum to a given
 
 */
 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
 // brute  force solution
 
 /*
@@ -111,12 +118,6 @@ For each triplet (nums[i], nums[j], nums[k]), check if their sum equals zero.
 If yes, sort the triplet to maintain a consistent order and insert it into the set to avoid duplicates.
 After processing all triplets, convert the set into a vector and return it as the final result.
 */
-
-#include <bits/stdc++.h>
-using namespace std;
-
-class Solution {
-public:
     //Function to find triplets having sum equals to target
     vector<vector<int>> threeSumBruteForce(vector<int>& nums) {
         // Set to store unique triplets
@@ -148,6 +149,79 @@ public:
        //Return the ans
         return ans;
     }
+
+    /*
+    Complexity Analyis **BRUTE
+Time Complexity: O(N3 x log(no. of unique triplets)), where N is size of the array. Using 3 nested loops & inserting triplets into the set takes O(log(no. of unique triplets)) time complexity. But we are not considering the time complexity of sorting as we are just sorting 3 elements every time.
+
+Space Complexity: O(2 x no. of the unique triplets) for using a set data structure and a list to store the triplets.Complexity Analyis
+Time Complexity: O(N3 x log(no. of unique triplets)), where N is size of the array. Using 3 nested loops & inserting triplets into the set takes O(log(no. of unique triplets)) time complexity. But we are not considering the time complexity of sorting as we are just sorting 3 elements every time.
+
+Space Complexity: O(2 x no. of the unique triplets) for using a set data structure and a list to store the triplets.
+    */
+
+    //**Better Solution */
+
+    /**
+     *Intuition
+     
+The better approach uses simple mathematics where some calculative parameter is taken in RHS(right hand side) to compute the result.
+For example if a + b + c = 0, then a + b = -c. Similar idea is used here.
+    ***Approach 
+Declare a set data structure to store unique triplets. Then iterate in the array lets call the variable i from index 0 to n -1. Inside it, there will be the second loop(say j) that will run from i+1 to n-1.
+Declare another HashSet to store the array elements as we intend to search for the third element using this HashSet.
+Inside the nested loop, calculate the value of the third element i.e. -(arr[i]+arr[j]).
+If the third element exists in the HashSet, sort these 3 values i.e. arr[i], arr[j], and the third element, and insert it in the set data structure declared in step 1.
+After that, insert the j-th element i.e. arr[j] in the HashSet as we only want to insert those array elements that are in between indices i and j. Finally, return a list of triplets stored in the set data structure.
+
+    ***Complexity Analysis
+Time Complexity: O(N2 x log(no. of unique triplets)), where N is size of the array.
+Inserting triplets into the set takes O(log(no. of unique triplets)) time complexity. However, we are not considering the time complexity of sorting, as we are only sorting 3 elements each time.
+Note: For Java (HashSet), insertion operation takes O(1) time. Thus, the overall time complexity for Java code will be O(N2)
+
+Space Complexity: O(2 x no. of the unique triplets) + O(N) for using a set data structure and a list to store the triplets and extra O(N) for storing the array elements in another set.
+     */
+
+     vector<vector<int>> threeSum(vector<int>& nums) {
+        // Set to store unique triplets
+        set<vector<int>> tripletSet;
+
+        int n = nums.size();
+
+        // Check all possible triplets
+        for (int i = 0; i < n; i++) {
+            // Set to store elements seen so far in the loop
+            set<int> hashset;
+
+            for (int j = i + 1; j < n; j++) {
+                // Calculate the 3rd element needed to reach target
+                int third = - (nums[i] + nums[j]);
+
+                /* Find if third element exists in
+                hashset (complements seen so far)*/
+                if (hashset.find(third) != hashset.end()) {
+                    // Found a triplet that sums up to target
+                    vector<int> temp = {nums[i], nums[j], third};
+                    
+                    /* Sort the triplet to ensure 
+                    uniqueness when storing in set*/
+                    sort(temp.begin(), temp.end());
+                    tripletSet.insert(temp);
+                }
+                
+                /* Insert the current element
+                into hashset for future checks*/
+                hashset.insert(nums[j]);
+            }
+        }
+
+        // Convert set to vector (unique triplets)
+        vector<vector<int>> ans(tripletSet.begin(), tripletSet.end());
+
+        //Return the ans
+        return ans;
+    }
+
 };
 
 int main() {
