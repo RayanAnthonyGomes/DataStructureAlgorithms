@@ -101,7 +101,7 @@ class Solution {
 public:
     /* Function to rotate the given 
     matrix by 90 degrees clockwise*/
-    void rotateMatrix(vector<vector<int>>& matrix) {
+    void rotateMatrixBRUTE(vector<vector<int>>& matrix) {
         
         /* Get the size of the matrix 
         (assuming it's a square matrix)*/
@@ -130,6 +130,35 @@ public:
             }
         }
     
+    }
+
+    /*OPTIMAL
+    Intuition
+The optimal way is to find the transpose of the matrix, which ensures that the first row of the matrix becomes the first column, the second row becomes the second column, and so on. Then, reverse each row. This method ensures that the array is rotated 90 degrees without using extra space.
+
+Approach 
+Run nested for loop say(i) for row and (j) for column to iterate the matrix and transpose the matrix to change rows to columns and columns to rows.
+Loop again to reverse each row of the matrix. Finally return the matrix.
+
+    */
+
+     /* Rotate the given matrix
+    by 90 degrees clockwise.
+    */
+    void rotateMatrix(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        
+        // Transpose the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        
+        // Reverse each row of the matrix
+        for (int i = 0; i < n; i++) {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
     }
 };
 
