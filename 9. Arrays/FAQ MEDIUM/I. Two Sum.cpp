@@ -152,7 +152,7 @@ Space Complexity: O(N) for using the map data structure
     */
 
 
-    vector<int> twoSum(vector<int>& nums, int target) {
+    vector<int> twoSumBetter(vector<int>& nums, int target) {
         
         // Map to store (element, index) pairs
         unordered_map<int, int> mpp; 
@@ -175,6 +175,82 @@ Space Complexity: O(N) for using the map data structure
 
             // Store current number and its index in map
             mpp[num] = i;
+        }
+
+        // If no such pair found, return {-1, -1}
+        return {-1, -1};
+    }
+
+    /*
+    **OPTIMAL SOLUTION**
+    Intuition
+Imagine being at a market with a list of ingredients, each with different calorie counts. You want to create a dish that meets a specific calorie target.
+
+To find the right pair of ingredients, first organize your ingredients from lowest to highest calories. This way, you can easily adjust your choices based on the total calories you need.
+
+Start with the lowest calorie ingredient and the highest calorie ingredient. By comparing their combined calories to target, decide whether to increase the total (by choosing a higher calorie ingredient) or decrease it (by choosing a lower calorie ingredient). This method allows you to efficiently zero in on the right pair, just like adjusting ingredients in a recipe until it tastes just right. If you find the perfect match, conclude that as your dish! If not, conclude there’s no suitable pair.
+
+Approach 
+Sort the given array and initialize two pointers i.e. left, which points to the 0th index, and right, which points to the last index.
+Now, using a loop, check the sum of arr[left] and arr[right] until left less than right.
+If sum of arr[left] and arr[right] greater than target, decrement the right pointer.
+If sum of arr[left] and arr[right] less than target, increment the left pointer.
+If sum of arr[left] and arr[right] equals to target, return the result. Finally, if no results are found we will return {-1, -1}.
+
+
+**Complexity Analysis 
+Time Complexity: O(N) + O(N*logN), where N is size of the array. As the loop will run at most N times & sorting the array will take N * logN time complexity.
+
+Space Complexity: O(N), because of the external data structure created to store the array elements along with their indices
+    */
+
+        vector<int> twoSum(vector<int>& nums, int target) {
+        // Size of the nums vector
+        int n = nums.size(); 
+        
+        // Vector to store indices of two numbers
+        vector<int> ans; 
+        
+        vector<vector<int>> eleIndex;
+        for(int i = 0; i < nums.size(); i++){
+            eleIndex.push_back({nums[i], i});
+        }
+        
+        //Sort by first element in ascending order
+        sort(eleIndex.begin(), eleIndex.end(), [](const vector<int>& a, const vector<int>& b) {
+           return a[0] < b[0]; 
+        });
+
+        /* Two pointers: one starting 
+        from left and one from right*/
+        int left = 0, right = n - 1; 
+
+        while (left < right) {
+             /* Calculate sum of elements
+             at left and right pointers*/
+            int sum = eleIndex[left][0] + eleIndex[right][0];
+
+            if (sum == target) {
+                
+                /* If sum equals target, 
+                store indices and return*/
+                ans.push_back(eleIndex[left][1]);
+                ans.push_back(eleIndex[right][1]);
+                return ans;
+                
+            } else if (sum < target) {
+                
+                /* If sum is less than target, 
+                move left pointer to the right*/
+                left++;
+                
+            } else {
+                
+                /* If sum is greater than target,
+                move right pointer to the left*/
+                right--;
+                
+            }
         }
 
         // If no such pair found, return {-1, -1}
