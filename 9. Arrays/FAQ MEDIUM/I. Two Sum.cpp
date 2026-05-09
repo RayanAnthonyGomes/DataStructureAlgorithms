@@ -105,7 +105,7 @@ Space Complexity: O(1), not using extra space.
     /*Function to find two indices in the array `nums`
     such that their elements sum up to `target`.*/
   
-    vector<int> twoSum(vector<int>& nums, int target) {
+    vector<int> twoSumBrute(vector<int>& nums, int target) {
         
         int n = nums.size();
         //create ans vector to store ans
@@ -127,7 +127,61 @@ Space Complexity: O(1), not using extra space.
         // Return {-1, -1} if no such pair is found
         return {-1, -1}; 
     }
+
+    /*
+    **Better Apprroach
+    Intuition
+The idea is to traverse the array and use a HashMap to check if for each element, an element in the HashMap exists, such that sum of both of the elements is equal to the target. This method trims down the search space and provides a better time complexity.
+
+Approach 
+Iterate in array from 0 to last index of the array (lets call this variable i).
+Then check if the other required element(i.e. target-arr[i]) exists in the hashMap.
+If that element exists, then return the current index i.e. i, and the index of the element found using map.
+If that element does not exist, then just store the current element in the hashMap along with its index. Because in the future, the current element might be a part of our answer.
+If at the end we have traversed whole array and no pair is found, that means that the target is unachievable. In this case, return {-1, -1}.
+
+    */
+
+    /*
+    Complexity Analysis 
+Time Complexity:O(N), where N is the size of the array. The loop runs N times in the worst case and searching in a hashmap takes O(1) generally. So the time complexity is O(N).
+
+Note:In the worst case(which rarely happens), the unordered_map takes O(N) to find an element. In that case, the time complexity will be O(N2). If we use map instead of unordered_map, the time complexity will be O(N* logN) as the map data structure takes logN time to find an element.
+
+Space Complexity: O(N) for using the map data structure
+    */
+
+
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        // Map to store (element, index) pairs
+        unordered_map<int, int> mpp; 
+        
+        // Size of the nums vector
+        int n = nums.size(); 
+
+        for (int i = 0; i < n; i++) {
+             // Current number in the vector
+            int num = nums[i];
+             // Number needed to reach the target
+            int moreNeeded = target - num;
+
+            // Check if the complement exists in map
+            if (mpp.find(moreNeeded) != mpp.end()) {
+                /* Return the indices of the 
+                two numbers that sum up to target*/
+                return {mpp[moreNeeded], i};
+            }
+
+            // Store current number and its index in map
+            mpp[num] = i;
+        }
+
+        // If no such pair found, return {-1, -1}
+        return {-1, -1};
+    }
 };
+
 
 int main() {
     int n = 5;
