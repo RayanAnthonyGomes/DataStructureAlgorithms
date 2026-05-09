@@ -182,7 +182,7 @@ Note: For Java (HashSet), insertion operation takes O(1) time. Thus, the overall
 Space Complexity: O(2 x no. of the unique triplets) + O(N) for using a set data structure and a list to store the triplets and extra O(N) for storing the array elements in another set.
      */
 
-     vector<vector<int>> threeSum(vector<int>& nums) {
+     vector<vector<int>> threeSumBetter(vector<int>& nums) {
         // Set to store unique triplets
         set<vector<int>> tripletSet;
 
@@ -219,6 +219,72 @@ Space Complexity: O(2 x no. of the unique triplets) + O(N) for using a set data 
         vector<vector<int>> ans(tripletSet.begin(), tripletSet.end());
 
         //Return the ans
+        return ans;
+    }
+    
+
+    //Optimal Approach
+    //**
+    /*
+    Intuition
+Imagine you're organizing a dinner party and you want to create a balanced meal with three different ingredients that together have zero net calories.
+
+First task would be to list all your ingredients by their calorie values and sort them. Then, for each ingredient, try to find two other ingredients from the remaining list that, when combined, balance the calories back to zero.
+
+Start with one ingredient and use two pointers, one starting from the left (beginning of the list) and the other from the right (end of the list). By adjusting these pointers, check if the three chosen ingredients balance to zero calories. If they do, you have a balanced meal! Continue this process, ensuring that the same combination of ingredients more than once is not picked.
+
+Approach 
+Sort the entire array & iterate from 0 to n-1 in the array, lets call the loop variable i. In each iteration, this value will be fixed for all different values of the rest of the 2 pointers.
+Inside the loop, first check if the current and the previous element is the same and if it is, do nothing and continue to the next value of i.
+After that, there will be 2 moving pointers i.e. j(starts from i+1) and k(starts from the last index). The pointer j will move forward and the pointer k will move backward until they cross each other while the value of i will be fixed.
+Now check the sum of arr[i] and arr[j] and arr[k]. If the sum is exceeding target, then the ask is to use lesser valued elements and so decrease the value of k(i.e. k--). If the sum is lesser than the target, we need a bigger value and so increase the value of j (i.e. j++).
+If the sum is equal to the target, simply insert the triplet i.e. arr[i], arr[j], arr[k] into answer data structure and move the pointers j and k skipping the duplicate elements(i.e. by checking the adjacent elements while moving the pointers). Finally, return the list of unique triplets.
+
+Complexity Analysis
+Time Complexity: O(NlogN)+O(N2), where N is size of the array. As the pointer i, is running for approximately N times. And both the pointers j and k combined can run for approximately N times including the operation of skipping duplicates. So the total time complexity will be O(N2).
+
+Space Complexity: O(1), no extra space is used. */
+
+        vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        // Vector to store the triplets that sum up to target
+        vector<vector<int>> ans;
+        
+        int n = nums.size();
+        
+        // Sort the input array nums
+        sort(nums.begin(), nums.end());
+        
+        // Iterate through the array to find triplets
+        for (int i = 0; i < n; i++) {
+            // Skip duplicates
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            
+            // Two pointers approach
+            int j = i + 1;
+            int k = n - 1;
+            
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                
+                if (sum < 0) {
+                    j++;
+                } else if (sum > 0) {
+                    k--;
+                } else {
+                    // Found a triplet that sums up to target
+                    vector<int> temp = {nums[i], nums[j], nums[k]};
+                    ans.push_back(temp);
+                    
+                    // Skip duplicates
+                    j++;
+                    k--;
+                    while (j < k && nums[j] == nums[j - 1]) j++;
+                    while (j < k && nums[k] == nums[k + 1]) k--;
+                }
+            }
+        }
+        
         return ans;
     }
 
