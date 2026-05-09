@@ -80,3 +80,75 @@ What if the matrix is sparse?
 For sparse matrices: Use a coordinate-based representation (e.g., a dictionary of non-zero values). Transform the coordinates for the rotation rather than manipulating the entire matrix. This reduces both time and space complexity for large sparse matrices.
 
 */
+
+/*
+BRUTE
+Intuition
+The naive way is to take another dummy matrix of row and column same as original matrix. Then, take the first row of the original matrix and place it in the last column of the dummy matrix. Next, take the second row of the original matrix and place it in the second last column of the dummy matrix, continuing this process until the last row of the original matrix is placed in the first column of the dummy matrix.
+
+Finally, copy the elements of the dummy matrix back to the original matrix. This procedure ensures that the original matrix is rotated by 90 degrees clockwise.
+
+Approach 
+initialize a dummy matrix to store the elemens in rotated order.
+Iterate in the array using nested for loops say (i) for row and (j) for columns and take the elements of the first row of matrix, put it in last column of the dummy matrix. Repeat this process until index i crosses sizeOfArray
+Again, copy the elements of the dummy matrix to the original matrix and finally, return the original matrix.
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    /* Function to rotate the given 
+    matrix by 90 degrees clockwise*/
+    void rotateMatrix(vector<vector<int>>& matrix) {
+        
+        /* Get the size of the matrix 
+        (assuming it's a square matrix)*/
+        int n = matrix.size();
+        
+        // Initialize new matrix to store rotated values
+        vector<vector<int>> rotated(n, vector<int>(n, 0)); 
+        
+        // Iterate through elements of original matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                
+                /* Rotate the element to its new 
+                position in the rotated matrix
+                New position is (j, n - i - 1) 
+                in the rotated matrix*/
+                
+                rotated[j][n - i - 1] = matrix[i][j];
+            }
+        }
+        
+        //copy rotated elements to matrix
+        for(int i = 0; i < rotated.size(); i++){
+            for(int j = 0; j < rotated[0].size(); j++){
+                matrix[i][j] = rotated[i][j];
+            }
+        }
+    
+    }
+};
+
+int main() {
+    vector<vector<int>> arr = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}; 
+    
+    // Create an instance of the Solution class
+    Solution sol; 
+    
+    sol.rotateMatrix(arr); 
+    
+    // Print the rotated matrix
+    cout << "Rotated Image" << endl;
+    for (int i = 0; i < arr.size(); i++) {
+        for (int j = 0; j < arr[0].size(); j++) {
+            cout << arr[i][j] << " "; 
+        }
+        cout << endl; 
+    }
+
+    return 0;
+}
