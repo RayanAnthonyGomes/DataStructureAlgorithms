@@ -134,7 +134,7 @@ Space Complexity: O(1) no extra space used.
                 the sum i.e. sum of nums[i...j-1]*/
                 sum += nums[j];
 
-                /* Update maxi with the maximum of its current
+                /* Update maxi with the maximum of its currenta
                 value and the sum of the current subarray*/
                 maxi = max(maxi, sum);
             }
@@ -144,6 +144,48 @@ Space Complexity: O(1) no extra space used.
         return maxi;
     }
 
+    //Optimal Solution
+    /*
+    Intuition 
+The intuition of the algorithm is to not consider the subarray as a part of the answer if its sum is less than 0. A subarray with a sum less than 0 will always reduce the answer and so this type of subarray cannot be a part of the subarray with maximum sum.
+
+Approach 
+Iterate in the array using a variable i & while iterating add the elements to the sum variable and consider the maximum one.
+If at any point the sum becomes negative, reset the sum to 0 as that will be not considered as a part of our answer. Finally, return the maximum sum.
+Complexity Analysis 
+Time Complexity: O(N) for single traversal, here N is the size of the array.
+
+Space Complexity: O(1), for not using any extra space.
+    */
+
+     int maxSubArray(vector<int>& nums) {
+        
+        // maximum sum
+        long long maxi = LLONG_MIN; 
+        
+        // current sum of subarray
+        long long sum = 0; 
+        
+        // Iterate through the array
+        for (int i = 0; i < nums.size(); i++) {
+            
+            // Add current element to the sum
+            sum += nums[i]; 
+            
+            // Update maxi if current sum is greater
+            if (sum > maxi) {
+                maxi = sum; 
+            }
+            
+            // Reset sum to 0 if it becomes negative
+            if (sum < 0) {
+                sum = 0; 
+            }
+        }
+        
+        // Return the maximum subarray sum found
+        return maxi;
+    }
 };
 
 int main() {
