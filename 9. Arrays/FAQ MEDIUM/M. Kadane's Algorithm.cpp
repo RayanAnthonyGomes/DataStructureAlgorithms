@@ -67,7 +67,7 @@ Time Complexity: O(N3), where N is the size of the array. Using three nested loo
 Space Complexity: O(1) no extra space used.
 
      */
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArrayBrute(vector<int>& nums) {
         
         /* Initialize maximum sum with 
         the smallest possible integer*/
@@ -98,6 +98,52 @@ Space Complexity: O(1) no extra space used.
         // Return the maximum subarray sum found
         return maxi; 
     }
+
+
+    //Better
+
+//     Intuition 
+// The better approach is to avoid triple looping structure mentioned previously that calculates the sum of each subarray. On observation we understand that to get the sum of the current subarray we just need to add the current element to the sum of the previous subarray, hence there is no need of third loop to do that.
+
+// Approach 
+// Iterate in the array lets say i to select every possible starting index of the subarray. The possible starting indices can vary from index 0 to index n-1(n is the array size).
+// Inside the loop, iterate again lets say j that will signify the ending index as well as the current element of the subarray. For every subarray starting from index i, the possible ending index can vary from index i to n-1(n is size of the array).
+// Inside loop j, keep adding the current element to the sum of the previous subarray. Among all the sums, the maximum one will be the answer and return it.
+// Complexity Analysis 
+// Time Complexity:O(N2), for using two nested loops, each running approximately N times, here N is the size of the array.
+
+// Space Complexity: O(1) for not using any extra space.
+ int maxSubArrayBetter(vector<int>& nums) {
+        
+        /* Initialize maximum sum with
+        the smallest possible integer*/
+        int maxi = INT_MIN; 
+
+        // Iterate over each starting index of subarrays
+        for (int i = 0; i < nums.size(); i++) {
+            
+            /* Variable to store the sum
+            of the current subarray*/
+            int sum = 0; 
+            
+            /* Iterate over each ending index
+            of subarrays starting from i*/
+            for (int j = i; j < nums.size(); j++) {
+                
+                /* Add the current element nums[j] to
+                the sum i.e. sum of nums[i...j-1]*/
+                sum += nums[j];
+
+                /* Update maxi with the maximum of its current
+                value and the sum of the current subarray*/
+                maxi = max(maxi, sum);
+            }
+        }
+
+        // Return the maximum subarray sum found
+        return maxi;
+    }
+
 };
 
 int main() {
