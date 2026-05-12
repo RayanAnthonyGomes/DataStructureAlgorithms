@@ -96,6 +96,57 @@ Space Complexity: O(1) no extra space used
         for (int i = cnt0 + cnt1; i < nums.size(); i++) nums[i] = 2;
     }
 
+    //ooptimal
+
+    /*
+    Intuition
+The optimal solution is a variation of the popular Dutch National flag algorithm.
+
+This algorithm contains 3 pointers i.e. low, mid, and high, and 3 main rules.
+
+Index 0 to low -1 contains 0
+Index low to mid - 1 contains 1
+Index high +1 to sizeOfArray - 1 contains 2.
+
+The middle part i.e. mid to high is the unsorted segment. So, this part is a mix of 0's, 1's and 2's. Follow the rules mentioned in approach and image below and sort the array.
+
+
+Approach 
+Initialize low and mid at 0 and high is sizeOfArray - 1, & iterate in the array until mid <= high. There can be three different values of mid pointer i.e. arr[mid].
+If arr[mid] is equal to 0, swap arr[low] and arr[mid] and increment both low and mid. Now the subarray from index 0 to (low-1) only contains 0.
+If arr[mid] is equal to 1, just increment the mid pointer and then the index (mid-1) will point to 1 as it should according to the rules.
+If arr[mid] is equal to 2, swap arr[mid] and arr[high] and decrement high. Now the subarray from index high+1 to (n-1) only contains 2. In this step, do nothing to the mid-pointer as even after swapping, the subarray from mid to high(after decrementing high) might be unsorted. So, check the value of mid again in the next iteration. Finally, the array should be sorted.
+
+Complexity Analysis 
+Time Complexity: O(N), where N is the size of the array, as there is single traversal of the array.
+    */
+     void sortZeroOneTwo(vector<int>& nums) {
+        
+        // 3 pointers: low, mid, high
+        int low = 0, mid = 0, high = nums.size() - 1; 
+        while (mid <= high) {
+            if (nums[mid] == 0) {
+                
+                /* Swap nums[low] and nums[mid], then 
+                 move both low and mid pointers forward*/
+                swap(nums[low], nums[mid]);
+                low++;
+                mid++;
+                
+            }
+            else if (nums[mid] == 1) {
+                // Move mid pointer forward
+                mid++;
+            }
+            else {
+                /* Swap nums[mid] and nums[high], 
+                then move high pointer backward*/
+                swap(nums[mid], nums[high]);
+                high--;
+            }
+        }
+    }
+
 };
 int main() {
     vector<int> nums = {2, 0, 1, 1, 0, 2};
