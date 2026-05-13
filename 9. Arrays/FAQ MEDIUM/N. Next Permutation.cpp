@@ -75,6 +75,33 @@ class Solution {
 public:
 
     // Function to get the next permutation of given array
+    /*
+    Intuition
+A straightforward but naive approach to solving this problem is to generate all possible permutations of the given array. Once all permutations are generated, we sort them in lexicographical order and perform a linear search to locate the current permutation. The next permutation in the sorted list is then returned. If the current permutation happens to be the last one, we simply return the first permutation from the sorted list.
+
+To generate all permutations, we use backtracking, where we recursively swap each element with the current index and explore all possible configurations. After each recursive call, we backtrack by swapping the elements back to restore the original state. This ensures that we explore every unique arrangement without missing or repeating any permutations.
+
+Approach
+
+Generate all permutations of the given array using backtracking.
+Store each permutation in a result list after exploring all positions by swapping elements recursively.
+Sort the list of all permutations in lexicographical order.
+Find the current permutation's index using linear search.
+If the current permutation is the last in order, return the first permutation.
+Otherwise, return the next permutation from the sorted list.
+Complexity Analysis
+Time Complexity: O(N × N!), where N is the size of the input array.
+Generating all permutations involves exploring N! arrangements, and each permutation requires O(N) time to construct, resulting in O(N × N!). Although sorting the permutations and performing a linear search add to the total time, the dominant factor remains O(N × N!) due to the exponential nature of permutation generation.
+
+Space Complexity: O(N × N!)
+Recursion stack takes up to O(N) space, and storing all permutations requires O(N × N!) space.
+
+Note
+Note that for C++ users, there is an STL function available to find the next permutation of the given array.
+
+The function next_permutation() from the <algorithm> header modifies the array in-place to the next lexicographical permutation. If the array is already the highest permutation, it rearranges it to the lowest possible order (i.e., sorted in ascending order). This function runs in O(N) time and is the most efficient way to solve this problem in C++.
+
+    */
     void nextPermutationBruteForce(vector<int>& nums) {
         // Get all the Permutations
         vector<vector<int>> ans = getAllPermutations(nums);
@@ -94,6 +121,70 @@ public:
         if(index == ans.size() - 1) nums = ans[0];
         else nums = ans[index + 1];
         
+        return;
+    }
+
+    //optimal Solution
+
+    /*
+    Intuition
+To find the next lexicographical permutation of an array, the key is to make the smallest possible change that results in a larger arrangement.
+
+The process begins by identifying a position in the array — called the pivot — where the value is smaller than the value immediately to its right. This break in descending order indicates where an increase in the permutation is possible. The pivot is the point from where the array stops being in non-increasing order when scanned from right to left.
+
+Once the pivot is found, the goal is to make the next permutation just slightly larger. To do this, scan from the end again to find the first number greater than the pivot. Swapping these two values ensures the increase in the number is minimal, keeping the permutation as close as possible to the original.
+
+After the swap, the portion of the array after the pivot is still in descending order, which is the highest possible order for those elements. To obtain the smallest possible suffix, this subarray can be reversed so that the elements are arranged in ascending order. This guarantees the next immediate permutation in lexicographical order.
+
+Approach
+
+Start from the end of the array.
+Find the first index where a smaller number is followed by a larger one.
+If no such index is found, the array is the last permutation.
+In that case, reverse the entire array and return.
+Otherwise, find the first number from the end that is greater than the number at the found index.
+Swap these two numbers.
+Reverse the subarray after the swapped index.
+This gives the next lexicographically greater permutation.
+
+Complexity Analysis
+Time Complexity: O(N), where N is the size of the input array.
+Finding the pivot takes O(N) time. Finding the next greater element also takes O(N) in the worst case. And, reversing the subarray takes O(N). All this adds up to a total of O(N) time complexity.
+
+Space Complexity: O(1), as the modification is done in-place and no extra data structure was used apart from a few variables.
+    */
+        // Function to get the next permutation of given array
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size(); // Size of the given array
+        
+        // To store the index of the first smaller element from right
+        int ind = -1; 
+        
+        // Find the first index from the end where nums[i] < nums[i+1]
+        for(int i = n-2; i >= 0; i--) {
+            if(nums[i] < nums[i+1]) {
+                ind = i;
+                break;
+            }
+        }
+        
+        /* If no such index exists, array is in descending order
+         So, reverse it to get the smallest permutation */
+        if(ind == -1) {
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+        
+        // Find the element just greater than nums[ind] from the end
+        for(int i = n-1; i > ind; i--) {
+            if(nums[i] > nums[ind]) {
+                swap(nums[i], nums[ind]); // Swap with nums[ind]
+                break;
+            }
+        }
+        
+        // Reverse the right half to get the next smallest permutation
+        reverse(nums.begin() + ind + 1, nums.end());
         return;
     }
     
