@@ -97,7 +97,7 @@ Complexity Analysis
 Time Complexity: O(N2), where N is the size of the array. Since we are using nested loops to count occurrences of every element between 1 to N.
 Space Complexity: O(1) as no extra space is used.
 */
-    vector<int> findMissingRepeatingNumbers(vector<int>& nums) {
+    vector<int> findMissingRepeatingNumbersBRUTE(vector<int>& nums) {
         
         // Size of the array
         int n = nums.size(); 
@@ -121,6 +121,56 @@ Space Complexity: O(1) as no extra space is used.
             are found, break out of loop*/
             if (repeating != -1 && missing != -1)
                 break;
+        }
+        
+        // Return {repeating, missing}
+        return {repeating, missing};
+    }
+
+    //Better Solution
+    /*
+    Intuition 
+The better way is, instead of counting the occurrences every time, use the hashing technique to store the frequency of each element between 1 to N. Now, the element with frequency 2 will be the repeating number and the element with frequency 0 will be the missing number.
+
+Approach 
+The range of the number is 1 to N, so declare a hash array of size N+1 (as we want to store the frequency of N as well).
+Iterate all the elements of the given array and update the hash array when an element is encountered .
+Now, iterate in the hash array and return the two elements with frequencies 2 and 0.
+
+    Complexity Analysis 
+Time Complexity: O(2*N), for using two loops each running for N times, where N is the size of the array.
+
+Space Complexity: O(N) for using a hash array.
+    */
+
+     vector<int> findMissingRepeatingNumbers(vector<int>& nums) {
+        
+        // Size of the array
+        int n = nums.size(); 
+        
+         // Hash array to count occurrences
+        int hash[n + 1] = {0};
+        
+        // Update the hash array:
+        for (int i = 0; i < n; i++) {
+            hash[nums[i]]++;
+        }
+
+        int repeating = -1, missing = -1;
+        
+        // Find the repeating and missing number:
+        for (int i = 1; i <= n; i++) {
+            if (hash[i] == 2) {
+                repeating = i;
+            } else if (hash[i] == 0) {
+                missing = i;
+            }
+
+            /* If both repeating and missing 
+            are found, break out of loop*/
+            if (repeating != -1 && missing != -1) {
+                break;
+            }
         }
         
         // Return {repeating, missing}
