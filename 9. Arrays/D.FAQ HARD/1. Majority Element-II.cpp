@@ -101,7 +101,7 @@ using namespace std;
 class Solution {
 public:
     // Function to find majority elements in an array
-    vector<int> majorityElementTwo(vector<int>& nums) {
+    vector<int> majorityElementTwoBr(vector<int>& nums) {
         
         // Size of the array
         int n = nums.size(); 
@@ -135,6 +135,55 @@ public:
     
     //return the majority elements
     return result;
+    }
+
+    //Better Solution
+    /*
+    Intuition 
+A better idea is to use a data structure to reduce the number of look-up operations and hence to reduce the time complexity. Moreover, we have been calculating the count of the same element again and again, so reduce that also.
+
+Approach 
+Use a hashmap and store the elements as pairs. (Can also use frequency array based on the size of nums). Here the key will be the element of the array and the value will be the number of times it occurs.
+Traverse the whole array and update the occurrence of each element.
+After that, check the map if the value for any element is greater than the floor of N/3. If yes, include it in the answer. Else, iterate forward. At any point if we find that the size of answer array is 2, break out of the loop. Finally, return the answer.
+
+Complexity Analysis 
+Time Complexity: O(N), where N is size of the given array. For using an unordered map data structure, where insertion in the map takes O(1) time and we are doing it for N elements. On using map instead, the first term will be O(N*logN) for the best and average case and for the worst case, it will be O(N2).
+
+Space Complexity: O(N) for uing a map data structure. A list that stores a maximum of 2 elements is also used, but that space used is so small that it can be considered constant.
+
+    */
+       vector<int> majorityElementTwo(vector<int>& nums) {
+        
+        // size of the array
+        int n = nums.size(); 
+        
+        // list of answers
+        vector<int> result; 
+        
+        // declaring a map
+        unordered_map<int, int> mpp;
+        
+        // least occurrence of the majority element
+        int mini = int(n / 3) + 1;
+        
+        // storing the elements with its occurrence
+        for (int i = 0; i < n; i++) {
+            mpp[nums[i]]++;
+            
+            // checking if nums[i] is the majority element
+            if (mpp[nums[i]] == mini) {
+                result.push_back(nums[i]);
+            }
+            
+            // if result size is equal to 2 break out of loop
+            if (result.size() == 2) {
+                break;
+            }
+        }
+        
+        // return the majority elements
+        return result;
     }
 };
 
