@@ -143,7 +143,7 @@ Time Complexity: O(2*N), for using two loops each running for N times, where N i
 Space Complexity: O(N) for using a hash array.
     */
 
-     vector<int> findMissingRepeatingNumbers(vector<int>& nums) {
+     vector<int> findMissingRepeatingNumbersBetter(vector<int>& nums) {
         
         // Size of the array
         int n = nums.size(); 
@@ -175,6 +175,59 @@ Space Complexity: O(N) for using a hash array.
         
         // Return {repeating, missing}
         return {repeating, missing};
+    }
+
+    ///Optimal  Approoach 1 using  mathematics
+    /*
+    Intuition
+The optimal way is to convert the given problem into mathematical equations. Since we have two variables i.e. missing and repeating, try to form two linear equations & find the values of two variables using those equations.
+
+Approach 
+First, find out the values of S and Sn, where S is the sum of all the elements of the array and Sn is the sum of natural numbers from 1 to N. Then calculate S - Sn and S - Sn = X - Y, where X is repeating number and Y is the missing number.
+Next, find the values of S2 and S2n , where S2 is the summation of squares of all the elements in the given array and S2n is summation of squares of the first N numbers((N*(N+1)*(2N+1))/6). Then calculate S2 - S2n and S2 - S2n = X2 - Y2.
+From the above steps X+Y = (S2 - S2n) / (X-Y)
+After performing steps 1 and 2, we will be having the values of X + Y and X - Y. Now, by substitution of values, we can easily find the values of X and Y. Finally, return X and Y.
+    Complexity Analysis 
+Time Complexity: O(N), as a single loop is used, where N is the size of the given array.
+
+Space Complexity: O(1) no extra space is used.
+    */
+       vector<int> findMissingRepeatingNumbers(vector<int>& nums) {
+        
+        // Size of the array
+        long long n = nums.size(); 
+
+        // Sum of first n natural numbers
+        long long SN = (n * (n + 1)) / 2;
+        
+        // Sum of squares of first n natural numbers
+        long long S2N = (n * (n + 1) * (2 * n + 1)) / 6;
+
+        /*Calculate actual sum (S) and sum 
+        of squares (S2) of array elements*/
+        long long S = 0, S2 = 0;
+        for (int i = 0; i < n; i++) {
+            S += nums[i];
+            S2 += (long long)nums[i] * (long long)nums[i];
+        }
+
+        //Compute the difference values
+        long long val1 = S - SN; 
+        
+        // S2 - S2n = X^2 - Y^2
+        long long val2 = S2 - S2N; 
+
+        //Calculate X + Y using X + Y = (X^2 - Y^2) / (X - Y)
+        val2 = val2 / val1;
+
+        /* Calculate X and Y from X + Y and X - Y
+         X = ((X + Y) + (X - Y)) / 2
+         Y = X - (X - Y)*/
+        long long x = (val1 + val2) / 2;
+        long long y = x - val1;
+
+        // Return the results as {repeating, missing}
+        return {(int)x, (int)y};
     }
 };
 
