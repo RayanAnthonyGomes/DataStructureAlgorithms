@@ -78,3 +78,66 @@ Use a hash set or frequency array instead of 1 to n assumption.
 
 
 */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    //Brute Approach
+/*
+Intuition 
+The naive way is to count the occurrence in the given array using linear search, for each number between 1 to N. The element which occurs twice will be the repeating number and the number with 0 occurrence will be the missing number.
+
+Approach 
+Iterate in array from 1 to N & for each integer, i, count its occurrence in the given array using linear search.
+Store those two elements that have the occurrence of 2 and 0. Finally, return the elements.
+Complexity Analysis 
+Time Complexity: O(N2), where N is the size of the array. Since we are using nested loops to count occurrences of every element between 1 to N.
+Space Complexity: O(1) as no extra space is used.
+*/
+    vector<int> findMissingRepeatingNumbers(vector<int>& nums) {
+        
+        // Size of the array
+        int n = nums.size(); 
+        int repeating = -1, missing = -1;
+
+        // Find the repeating and missing number:
+        for (int i = 1; i <= n; i++) {
+            
+            // Count the occurrences:
+            int cnt = 0;
+            
+            for (int j = 0; j < n; j++) {
+                if (nums[j] == i) cnt++;
+            }
+
+            // Check if i is repeating or missing
+            if (cnt == 2) repeating = i;
+            else if (cnt == 0) missing = i;
+
+            /* If both repeating and missing
+            are found, break out of loop*/
+            if (repeating != -1 && missing != -1)
+                break;
+        }
+        
+        // Return {repeating, missing}
+        return {repeating, missing};
+    }
+};
+
+int main() {
+    vector<int> nums = {3, 1, 2, 5, 4, 6, 7, 5};
+    
+    // Create an instance of Solution class
+    Solution sol;
+
+    vector<int> result = sol.findMissingRepeatingNumbers(nums);
+    
+    // Print the repeating and missing numbers found
+    cout << "The repeating and missing numbers are: {" << result[0] << ", " << result[1] << "}\n";
+    
+    return 0;
+}
