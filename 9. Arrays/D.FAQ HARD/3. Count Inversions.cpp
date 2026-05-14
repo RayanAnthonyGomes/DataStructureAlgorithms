@@ -94,3 +94,59 @@ Modify the merge function to return both sorted output and the inversion count.
 
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    //brute force algorithm
+    /*
+    Intuition 
+The naive approach is pretty straightforward, which will use nested loops to solve this problem. The prerequisite is that the index i must be smaller than index j. So, fix i at one index, and with another loop say(j), which runs from i+1 to last index of the array, try to count the inversion pairs.
+
+Approach 
+Iterate in array from 0 to N-1 to select the first element in the pair. As index j should be greater than index i, inside loop i, run another loop i.e. j from i+1 to N-1. Inside this second loop, check if arr[i] is greater than arr[j] i.e. if arr[i] and arr[j] can be an inversion pair. If it satisfy the condition, increase the count by 1.
+Finally, return the count i.e. the number of such pairs.
+Complexity Analysis 
+Time Complexity: O(N2), for using 2 nested loops, where N is the size of the array.
+    */
+    // Function to find number of inversions in an array
+    long long int numberOfInversionsBRUTE(vector<int>&nums) {
+    
+    //size of the array 
+    int n = nums.size();
+    
+    // Count the number of pairs:
+    long long int cnt = 0;
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            
+            /*if nums[i] is greater than 
+            nums[j], increase countby 1.*/
+            if (nums[i] > nums[j]) cnt++;
+            
+        }
+    }
+    
+    //return the count of inversions
+    return cnt;
+
+    }
+};
+
+int main() {
+    vector<int> nums = {5, 4, 3, 2, 1};
+    
+    // Create an instance of Solution class
+    Solution sol;
+
+    long long int result = sol.numberOfInversions(nums);
+    
+    // Print the repeating and missing numbers found
+    cout << "The number of inversions is: "
+         << result << endl;
+    
+    return 0;
+}
