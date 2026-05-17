@@ -251,4 +251,4 @@ int main() {
     // Output the result
     cout << "The number of reverse pairs is: " << cnt << endl;
     return 0; 
-}
+}  
