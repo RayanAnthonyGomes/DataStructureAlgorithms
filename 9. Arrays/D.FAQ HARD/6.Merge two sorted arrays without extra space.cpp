@@ -80,7 +80,7 @@ Placing elements from the end avoids shifting elements, making the process O(n +
 Can this be solved using extra space?
 Yes, but in-place merging is required, so no extra space should be used.
 Interview Follow-ups
-
+      
 
 How would you modify this if nums1 did not have extra space?
 Use a temporary array, merge both, then copy back into nums1.
