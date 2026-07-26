@@ -79,6 +79,18 @@ long long factorial(int x){
 
 //Armstrong Numbers
 
+bool armstr(int x){
+    int dup = x;
+    int cnt = log10(x) + 1;
+    int sum = 0;
+
+    while(x > 0 ){
+        int ld = x %10;
+        sum += pow(ld,cnt);
+        x=x/10;
+    }
+    return (dup == sum);
+}
 
 
 
@@ -86,5 +98,5 @@ int  main(){
     int n;
     cout << "please enter a number: ";
     cin >> n;
-    cout  <<  factorial(n)  << endl;
+    cout  <<  boolalpha <<armstr(n)  << endl;
 }
