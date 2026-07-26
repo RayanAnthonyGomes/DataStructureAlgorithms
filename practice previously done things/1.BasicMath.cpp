@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//1. Count Digits of a number given
+        //Loops
+int cntDigits(int x){
+    if(x == 0) return  1;
+    int cnt = 0;
+    while(x>0){
+        x = x/10;
+        cnt++;
+    }
+    return cnt;
+}
+    ///Maths
+int cntDigitsMathWay(int x){
+   if(x==0) return 1; 
+   int cnt = log10(x) + 1;
+   return cnt;
+}
+
+
+//2. Count Odd Digits of a Number
+
+int  cntOdd(int x){
+    int cnt = 0;
+    while(x>0){
+        int lastD = x % 10;
+        if(lastD % 2 == 1) cnt++;
+        x = x/10;
+    }
+    return cnt;
+}
+
+//3. Reverse a number 
+int  ReverseNumber(int  x){
+    int revn = 0;
+    while(x>0){
+        int  ld=
+    }
+}
+
+
+
+int  main(){
+    int n;
+    cout << "please enter a number: ";
+    cin >> n;
+    cout  <<  cntOdd(n)  << endl;
+}
