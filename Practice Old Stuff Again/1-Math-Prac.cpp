@@ -52,10 +52,22 @@ bool isPalindrome(int x){
     return (x == reverse);
 } 
 
+int largestDigit(int x){
+    int l = 0;
+    if(x==0) return 0;
+    while(x>0){
+        int ld = x%10;
+        if(ld>l) l = ld;
+        x = x/10;
+    }
+    return l;
+}
+
+l
 
 int  main(){
     int n;
     cout << "please enter a number: ";
     cin >> n;
-    cout  <<  boolalpha << isPalindrome(n)  << endl;
+    cout  <<  largestDigit(n)  << endl;
 }
