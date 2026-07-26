@@ -122,9 +122,29 @@ bool perfectNumopt(int x) {
     return sum == x;
 }
 
+
+//Prime Numbers
+
+bool isPrime(int x) {
+    if(x==1) return false;
+    for(int i = 2; i < x; i++){
+        if(x%i ==0) return false;
+
+    }
+    return true;
+}
+
+bool isPrimeOpt(int x){ //sqrt method
+     if(x==1) return false;
+    for(int i = 2; i < sqrt(x); i++){
+        if(x%i ==0) return false;
+    }
+    return true;
+}
+
 int  main(){
     int n;
     cout << "please enter a number: ";
     cin >> n;
-    cout  <<  boolalpha << perfectNumopt(n)  << endl;
+    cout  <<  boolalpha << isPrimeOpt(n)  << endl;
 }
