@@ -141,6 +141,17 @@ bool isPrimeOpt(int x){ //sqrt method
     }
     return true;
 }
+int primeTillN(int x){
+    int cnt =0;
+    for(int i = 2; i <= n; i++){
+        if(isPrimeOpt(i)) cnt++;
+    }
+    return cnt;
+}
+
+
+//GCD of Two Numbers
+
 
 int  main(){
     int n;
