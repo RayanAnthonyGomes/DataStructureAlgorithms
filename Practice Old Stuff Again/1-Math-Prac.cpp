@@ -93,10 +93,38 @@ bool armstr(int x){
 }
 
 
+// Perfect Number
+
+bool perfectNum(int x){
+    int sum = 0;
+    int dup = x;
+    for(int i = 1; i <  x; i++){
+        if(x % i == 0){
+            sum += i;
+        }
+    }
+    return (sum == dup);
+}
+//optimize
+bool perfectNumopt(int x) {
+    if (x <= 1) return false; // 1 and negative numbers are not perfect numbers
+    
+    int sum = 1; // 1 is always a proper divisor
+    
+    for(int i = 2; i * i <= x; i++){
+        if(x % i == 0) {
+            sum += i;
+            if(i != (x / i)) { 
+                sum += (x / i); // Add the companion divisor safely
+            }
+        }
+    }
+    return sum == x;
+}
 
 int  main(){
     int n;
     cout << "please enter a number: ";
     cin >> n;
-    cout  <<  boolalpha <<armstr(n)  << endl;
+    cout  <<  boolalpha << perfectNumopt(n)  << endl;
 }
