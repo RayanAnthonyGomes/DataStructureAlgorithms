@@ -52,6 +52,9 @@ bool isPalindrome(int x){
     return (x == reverse);
 } 
 
+
+// Largest Digit of a number
+
 int largestDigit(int x){
     int l = 0;
     if(x==0) return 0;
@@ -61,13 +64,27 @@ int largestDigit(int x){
         x = x/10;
     }
     return l;
-}
+} //TC: 0(log10(num))
 
-l
+//Factorial
+
+long long factorial(int x){
+    int ans = 1;
+    for(int i = 1; i <= x; i++){
+        ans = ans * i; 
+    }
+    return ans;
+}
+//TC: O(n)
+
+//Armstrong Numbers
+
+
+
 
 int  main(){
     int n;
     cout << "please enter a number: ";
     cin >> n;
-    cout  <<  largestDigit(n)  << endl;
+    cout  <<  factorial(n)  << endl;
 }
