@@ -143,7 +143,7 @@ bool isPrimeOpt(int x){ //sqrt method
 }
 int primeTillN(int x){
     int cnt =0;
-    for(int i = 2; i <= n; i++){
+    for(int i = 2; i <= x; i++){
         if(isPrimeOpt(i)) cnt++;
     }
     return cnt;
@@ -151,13 +151,24 @@ int primeTillN(int x){
 
 
 //GCD of Two Numbers
-int gcdBrute(int x){
+int gcd(int n1,int n2){
     
+    while(n1>0 && n2>0){
+        if(n1>n2) n1 = n1 % n2;
+        else n2 = n2 % n1;
+    }
+    if(n1 == 0) return n2;
+    else return n1;
+
 }
 
 int  main(){
-    int n;
-    cout << "please enter a number: ";
-    cin >> n;
-    cout  <<  boolalpha << isPrimeOpt(n)  << endl;
+    int x,y;
+    cout << "Please enter 2 numbs: ";
+    cin >> x >> y;
+    cout << "2 numbers are" << x << "  " << y;
+    cout << endl;
+    cout << "GCD is "<<  gcd(x,y);
+
+    
 }
