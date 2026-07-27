@@ -151,7 +151,9 @@ int primeTillN(int x){
 
 
 //GCD of Two Numbers
-
+int gcdBrute(int x){
+    
+}
 
 int  main(){
     int n;
