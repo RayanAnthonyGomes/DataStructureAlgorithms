@@ -162,13 +162,22 @@ int gcd(int n1,int n2){
 
 }
 
+
+//LCM of two Numbers
+
+int lcm(int n1,int n2){
+    int G  = gcd(n1,n2);
+    int l = (n1*n2)/G;
+    return l;
+}
+
 int  main(){
     int x,y;
     cout << "Please enter 2 numbs: ";
     cin >> x >> y;
     cout << "2 numbers are" << x << "  " << y;
     cout << endl;
-    cout << "GCD is "<<  gcd(x,y);
+    cout << "lcm is "<<  lcm(x,y);
 
     
 }
