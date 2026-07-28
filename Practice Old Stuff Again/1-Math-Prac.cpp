@@ -171,13 +171,23 @@ int lcm(int n1,int n2){
     return l;
 }
 
-int  main(){
-    int x,y;
-    cout << "Please enter 2 numbs: ";
-    cin >> x >> y;
-    cout << "2 numbers are" << x << "  " << y;
-    cout << endl;
-    cout << "lcm is "<<  lcm(x,y);
+//proper divisors
 
+vector<int> brute(int n){
+    vector<int> ans;
+    for(int i = 1; i <= n; i++){
+        if(n%i==0) ans.push_back(i);
+    }
+    return ans;
+}
+
+
+int  main(){
+    int x;
+    cin >> x;
+    vector<int> ans = brute(x);
+    for(auto it:ans){
+        cout << it << " ";
+    }
     
 }
