@@ -193,10 +193,25 @@ vector <int> better(int n){
 
 }
 
+vector<int> best(int n){
+    vector<int> small;
+    vector<int> large;
+
+    for(int i = 1; i*i <=n; i++){
+        if(n%i==0) small.push_back(i);
+        if(i!=n/i) large.push_back(n/i);
+    }
+
+    for(int i = large.size() - 1; i >= 0; i--){
+        small.push_back (large[i]);
+    }
+    return small;
+}
+
 int  main(){
     int x;
     cin >> x;
-    vector<int> ans = better(x);
+    vector<int> ans = best(x);
     for(auto it:ans){
         cout << it << " ";
     }
