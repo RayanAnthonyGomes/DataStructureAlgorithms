@@ -181,11 +181,22 @@ vector<int> brute(int n){
     return ans;
 }
 
+vector <int> better(int n){
+    vector<int> ans;
+    int sqrtn = sqrt(n);
+    for(int i = 1; i <= sqrtn; i++){
+        if(n%i ==  0) ans.push_back(i);
+        if(i != n/i) ans.push_back(n/i);
+    }
+    sort(ans.begin(), ans.end());
+    return ans;
+
+}
 
 int  main(){
     int x;
     cin >> x;
-    vector<int> ans = brute(x);
+    vector<int> ans = better(x);
     for(auto it:ans){
         cout << it << " ";
     }
