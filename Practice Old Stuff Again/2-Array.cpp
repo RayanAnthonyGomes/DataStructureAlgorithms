@@ -4,6 +4,13 @@ using namespace std;
 class Solution:
     public:
     {
+        //print array elemss
+        void printarr(arr){
+            cout << "Array Elements: " << endl;
+            for(int i = 0; i< n; i++){
+                cout << arr[i] << " ";
+            }
+        }
         //Print array elements sum
         int sumArr(arr,n){
             int sum  = 0;
@@ -24,7 +31,7 @@ int main(){
 
     Solution  sol = sol.sumArr(array,n);
 
-    
+    cout << sol;
 
 
 
