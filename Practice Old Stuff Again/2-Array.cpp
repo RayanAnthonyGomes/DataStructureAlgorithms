@@ -52,9 +52,6 @@ int main() {
     // Print the result
     //cout << result << endl;
 
-    int res  = sol.sumArr(nums);
-    cout << res;
-
-    
+    sol.print(nums); // This  works as printing array yay..
     return 0;
 }
