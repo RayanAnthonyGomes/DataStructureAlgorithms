@@ -23,6 +23,16 @@ int sumArr(vector<int> &nums){
 }
 
 
+//Count  odd numbers  in  an array
+
+int cntOdd(vector<int> &nums){
+    int cnt = 0;
+    for(int i = 0; i < nums.size(); i++){
+        if(nums[i]%2==1) cnt++;
+    }
+    return cnt;
+}
+
 
 // Linear Search Function
     int linearSearch(vector<int>& nums, int target) {
@@ -53,5 +63,10 @@ int main() {
     //cout << result << endl;
 
     sol.print(nums); // This  works as printing array yay..
+
+    //Returning the count of odd numbers
+    int resultOdd = sol.cntOdd(nums);
+    cout << endl << "Count of Odd nums: " <<resultOdd;
+
     return 0;
 }
