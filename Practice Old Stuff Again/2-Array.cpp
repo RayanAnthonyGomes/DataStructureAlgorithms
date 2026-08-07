@@ -34,6 +34,18 @@ int cntOdd(vector<int> &nums){
 }
 
 
+//Reverse given array
+void revArr(vector<int> &nums){
+    int n = nums.size();
+    int left = 0; 
+    int right =  n-1;
+    while(left<right){
+        swap(nums[left], nums[right]);
+        left++, right--;
+    }
+    
+}
+
 // Linear Search Function
     int linearSearch(vector<int>& nums, int target) {
         // Traverse the entire vector
@@ -68,5 +80,10 @@ int main() {
     int resultOdd = sol.cntOdd(nums);
     cout << endl << "Count of Odd nums: " <<resultOdd;
 
+
+    //reversing  the array; c
+    cout << endl;
+    sol.revArr(nums); cout  << "After reversing  the array: ";
+    sol.print(nums);
     return 0;
 }
