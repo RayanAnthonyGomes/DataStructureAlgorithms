@@ -1,40 +1,48 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Solution:
-    public:
-    {
-        //print array elemss
-        void printarr(arr){
-            cout << "Array Elements: " << endl;
-            for(int i = 0; i< n; i++){
-                cout << arr[i] << " ";
-            }
-        }
-        //Print array elements sum
-        int sumArr(arr,n){
-            int sum  = 0;
-            for(int i = 0; i  < n;  i++){
-                sum+= arr[i];
-            }
-            return sum;
-        }
+class Solution {
+public:
 
-        
+//Print Array Elements
+void print(vector<int> &nums){
+    int size = nums.size();
+    cout << "Printing array: " << "\n";
+    for(int i =  0; i < size; i++){
+        cout << nums[i] << " ";
     }
-
-
-
-int main(){
-    int array [] = {1,23,5,123,56,1,2,5};
-    int n = array.size();
-
-    Solution  sol = sol.sumArr(array,n);
-
-    cout << sol;
+}
 
 
 
 
+// Linear Search Function
+    int linearSearch(vector<int>& nums, int target) {
+        // Traverse the entire vector
+        for (int i = 0; i < nums.size(); i++) {
+            // Check if current element is target
+            if (nums[i] == target) {
+                // Return index
+                return i;
+            }
+        }
+        // If target not found
+        return -1;
+    }
+};
 
+int main() {
+    vector<int> nums = {1, 2, 3, 4, 5};
+    int target = 4;
+
+    // Create an instance of the Solution class
+    Solution sol;
+
+    // Call the linearSearch method
+    int result = sol.linearSearch(nums, target);
+
+    // Print the result
+    cout << result << endl;
+
+    return 0;
 }
