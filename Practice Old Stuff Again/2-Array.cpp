@@ -47,10 +47,14 @@ int main() {
     Solution sol;
 
     // Call the linearSearch method
-    int result = sol.linearSearch(nums, target);
+    //int result = sol.linearSearch(nums, target);
 
     // Print the result
-    cout << result << endl;
+    //cout << result << endl;
 
+    int res  = sol.sumArr(nums);
+    cout << res;
+
+    
     return 0;
 }
