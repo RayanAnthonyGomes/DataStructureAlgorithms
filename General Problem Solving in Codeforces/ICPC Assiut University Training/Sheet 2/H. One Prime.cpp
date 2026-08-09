@@ -35,7 +35,7 @@ First Example :
 Second Example :
 
 15 not is prime because it is divisible by 3 ,5, so the answer is NO.
-
+Also 16 is not aa prime so threres that
 */
 #include <bits/stdc++.h>
 using namespace std;
