@@ -105,7 +105,7 @@ public:
     */
 
     // Second Largest Number in an array
-    //Brute Force Approach
+        //Brute Force Approach
     int secondLargestBrute(vector<int> &nums){
         int n = nums.size();
         if(n < 2) return -1;
@@ -121,6 +121,23 @@ public:
 
         return secondLargest;
     }
+        //Better Approach
+        int secondLargestBetter(vector<int> &nums){
+            int n = nums.size();
+            if(n < 2) return -1;
+            int largest = INT_MIN;
+            int secondLargest = INT_MIN;
+            for(int i = 0; i <n; i++){
+                largest = max(largest, nums[i]);
+            }
+            for(int i = 0; i<n; i++){
+                if(nums[i] >  secondLargest && nums[i] < largest){
+                    secondLargest = nums[i];
+                }
+            }
+            return secondLargest;
+        }
+
 };
 
 int main()
@@ -158,6 +175,7 @@ int main()
     int secondLargest = sol.secondLargestBrute(nums);
     cout << endl << "Second Largest Number in the array: " << secondLargest << endl;
 
-    
+    int secondLargestBetter = sol.secondLargestBetter(nums);
+    cout << "Second Largest Number (Better Approach): " << secondLargestBetter << endl;
 }
 //Is Boolalpha  reaally doing it?
