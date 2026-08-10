@@ -81,6 +81,21 @@ public:
         // If target not found
         return -1;
     }
+
+
+    //Largest Number in an array
+    int largestNum(vector<int> &nums){
+        
+        int largest = nums[0];
+        for(int i=1; i<nums.size(); i++){
+            if(nums[i] > largest){
+                largest = nums[i];
+            }
+        }
+        return largest;
+    }
+
+    
 };
 
 int main()
