@@ -104,7 +104,23 @@ public:
     Left Rotate Array by k places
     */
 
-    
+    // Second Largest Number in an array
+    //Brute Force Approach
+    int secondLargestBrute(vector<int> &nums){
+        int n = nums.size();
+        if(n < 2) return -1;
+        sort(nums.begin(), nums.end());
+        int largest = nums.back();
+        int  secondLargest = -1;
+        for(int i = n-2; i>=0; i--){
+            if(nums[i] != largest){
+                secondLargest = nums[i];
+                break;
+            }
+        }
+
+        return secondLargest;
+    }
 };
 
 int main()
@@ -134,10 +150,14 @@ int main()
     cout << "After reversing  the array: ";
     sol.print(nums);
 
-    // reversing array again to get to  normal version
-    sol.revArr(nums); /// now its in asc form lets check. with another algo
-    cout << endl << "Checking if the array  is sorted  in asc order: ";
-    cout << boolalpha <<(sol.isSorted(nums));
-    return 0;
+    // // reversing array again to get to  normal version
+    // sol.revArr(nums); /// now its in asc form lets check. with another algo
+    // cout << endl << "Checking if the array  is sorted  in asc order: ";
+    // cout << boolalpha <<(sol.isSorted(nums));
+
+    int secondLargest = sol.secondLargestBrute(nums);
+    cout << endl << "Second Largest Number in the array: " << secondLargest << endl;
+
+    
 }
 //Is Boolalpha  reaally doing it?
