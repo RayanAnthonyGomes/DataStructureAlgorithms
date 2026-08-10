@@ -137,7 +137,23 @@ public:
             }
             return secondLargest;
         }
-
+        
+        //Optimal Approach
+        int secondLargest(vector<int> &nums){
+            if(nums.size()<2) return -1;
+            int largest = INT_MIN;
+            int secondLargest = INT_MIN;
+            for(int i = 0; i<nums.size(); i++){
+                if(nums[i] > largest){
+                    secondLargest = largest;
+                    largest = nums[i];
+                }
+                else if(nums[i] > secondLargest && nums[i] < largest){
+                    secondLargest = nums[i];
+                }
+            }
+            return secondLargest;
+        }
 };
 
 int main()
@@ -177,5 +193,8 @@ int main()
 
     int secondLargestBetter = sol.secondLargestBetter(nums);
     cout << "Second Largest Number (Better Approach): " << secondLargestBetter << endl;
+
+    int secondLargestOptimal = sol.secondLargest(nums);
+    cout << "Second Largest Number (Optimal Approach): " << secondLargestOptimal << endl;
 }
 //Is Boolalpha  reaally doing it?
