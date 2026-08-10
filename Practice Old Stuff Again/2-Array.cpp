@@ -95,6 +95,15 @@ public:
         return largest;
     }
 
+    ///Array  Fundamentals
+    /*
+    Problems:
+    Second Largest Number in an array
+    Maximum consecutive 1's in an array
+    Left Roate Array by one
+    Left Rotate Array by k places
+    */
+
     
 };
 
