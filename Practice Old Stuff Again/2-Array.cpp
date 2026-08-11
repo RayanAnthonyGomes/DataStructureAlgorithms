@@ -169,6 +169,20 @@ public:
         }
         return maxi;
     }
+
+    //Left Rotate Array by one
+      void rotateArrayByOne(vector<int>& nums) {
+        // Store the first element in a temporary variable
+        int temp = nums[0];
+        
+        // Shift elements to the left
+        for (int i = 1; i < nums.size(); ++i) {
+            nums[i - 1] = nums[i];
+        }
+
+        // Place the first element at the end
+        nums[nums.size() - 1] = temp;
+    }
 };
 
 int main()
@@ -214,5 +228,10 @@ int main()
 
     int maximumconsecuteones = sol.findMaxConsecutiveOnes(nums);
     cout << "Maximum consecutive 1's in this array is : " << maximumconsecuteones << endl;
+
+    sol.rotateArrayByOne(nums);
+    cout << "Array after left rotation by one: " << endl;
+    sol.print(nums);
+
 }
-//Is Boolalpha  reaally doing it?
+
