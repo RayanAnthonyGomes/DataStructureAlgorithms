@@ -154,6 +154,21 @@ public:
             }
             return secondLargest;
         }
+
+    //Maximum Consecutive 1's in an array
+        int findMaxConsecutiveOnes(vector<int>& nums) {
+        int maxi = 0; 
+        int cnt = 0;
+        for(int i = 0; i < nums.size(); i++){
+            if(nums[i] == 1){
+                cnt++;
+                maxi = max(maxi,cnt);
+            }else{
+                cnt = 0;
+            }
+        }
+        return maxi;
+    }
 };
 
 int main()
@@ -196,5 +211,8 @@ int main()
 
     int secondLargestOptimal = sol.secondLargest(nums);
     cout << "Second Largest Number (Optimal Approach): " << secondLargestOptimal << endl;
+
+    int maximumconsecuteones = sol.findMaxConsecutiveOnes(nums);
+    cout << "Maximum consecutive 1's in this array is : " << maximumconsecuteones << endl;
 }
 //Is Boolalpha  reaally doing it?
