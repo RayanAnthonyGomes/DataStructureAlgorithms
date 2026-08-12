@@ -185,7 +185,7 @@ public:
     }
 
     //Left rotate the array by k places
-    void rotate(vector<int> &nums, int k){
+    void rotateBrute(vector<int> &nums, int k){
         int n =  nums.size();
         k = k%n;
         vector<int>  temp;
@@ -201,6 +201,26 @@ public:
         for(int i = 0; i<k;  i++){
             nums[n-k+i] = temp[i];
         }
+    }
+
+    //optimal
+    void reverseArray(vector<int> &nums, int left, int right){
+        while(left<right){
+            swap(nums[left], nums[right]);
+            left++, right--;
+        }
+    }
+    void rot(vector<int> &nums,  int  k){
+        int n = nums.size();
+        k = k % n;
+        ///Reverse first k  elems
+        reverseArray(nums, 0,  k-1);
+
+        //Reverse n-k elems
+        reverseArray(nums, k, n-1);
+
+        //reverse entire
+        reverseArray(nums, 0, n-1);
     }
 };
 
@@ -254,7 +274,7 @@ int main()
 
     //Rotate array  by  k  places  print
     int zzz = 20;
-    sol.rotate(nums, zzz);
+    sol.rot(nums, zzz);
     cout << "The Nums array after " <<  zzz << " rotations is  now: \n";
     sol.print(nums);
 }
