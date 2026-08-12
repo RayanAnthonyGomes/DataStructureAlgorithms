@@ -183,6 +183,25 @@ public:
         // Place the first element at the end
         nums[nums.size() - 1] = temp;
     }
+
+    //Left rotate the array by k places
+    void rotate(vector<int> &nums, int k){
+        int n =  nums.size();
+        k = k%n;
+        vector<int>  temp;
+        
+        for(int  i  = 0; i < k; i++){
+            temp.push_back(nums[i]);
+        }
+        ///shift
+        for(int i = k;  k < n;  i++){
+            nums[i-k] = nums[i];
+        }
+        ///Pull  back to the  end of k eelems
+        for(int i = 0; i<k;  i++){
+            nums[n-k+i] = temp[i];
+        }
+    }
 };
 
 int main()
@@ -233,5 +252,10 @@ int main()
     cout << "Array after left rotation by one: " << endl;
     sol.print(nums);
 
+    //Rotate array  by  k  places  print
+    int zzz = 20;
+    sol.rotate(nums, zzz);
+    cout << "The Nums array after " <<  zzz << " rotations is  now: \n";
+    sol.print(nums);
 }
 
