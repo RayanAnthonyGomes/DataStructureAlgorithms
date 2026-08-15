@@ -277,7 +277,7 @@ int main()
     sol.rot(nums, zzz);
     cout << "The Nums array after " <<  zzz << " rotations is  now: \n";
     sol.print(nums);
-
+    
     //Code runner extension  not working please fix it soon
     //Havent fixed yet but  working on it
 }
